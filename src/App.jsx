@@ -5,9 +5,12 @@ import Container from "@mui/material/Container";
 import ToDoInput from "./components/ToDoInput";
 import { useState } from "react";
 import ToDoItem from "./components/ToDoItem";
+import ToDo from "./components/ToDo";
 
 function App() {
   const [items, setItems] = useState([]);
+
+  const [tasks, settasks] = useState();
 
   function addItem(textInput) {
     setItems((prevItems) => {
@@ -42,6 +45,11 @@ function App() {
               />
             ))}
           </ul>
+        </div>
+        <h2>Another example of a ToDo</h2>
+
+        <div>
+          <ToDo />
         </div>
       </Container>
     </>
