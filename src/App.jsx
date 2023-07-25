@@ -8,6 +8,7 @@ import { useState } from "react";
 import ToDoItem from "./components/ToDoItem";
 import ToDo from "./components/ToDo";
 import "./someStyles.css";
+import FilterBtn from "./components/FilterBtn";
 
 function App(props) {
   const [items, setItems] = useState([]);
@@ -65,6 +66,7 @@ function App(props) {
           <label htmlFor="new-todo-input" className="label__lg">
             What needs to be done?
           </label>
+          <FilterBtn></FilterBtn>
         </h2>
         <input
           type="text"

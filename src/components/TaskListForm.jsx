@@ -1,11 +1,11 @@
 import TextField from "@mui/material/TextField";
 
-export default function TaskListForm(props) {
+export default function TaskListForm() {
   return (
     <form>
       <h2 className="label-wrapper">
         <label htmlFor="new-todo-input" className="label__lg">
-          What needs to be done?
+          Anything else needs to be done?
         </label>
       </h2>
       <input
