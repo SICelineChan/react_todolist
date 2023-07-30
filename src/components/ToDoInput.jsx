@@ -11,6 +11,7 @@ export default function ToDoInput(props) {
 
   function handleAddButton(e) {
     const newToDo = e.target.value;
+    console.log(e.target.value);
     setTextInput(newToDo);
   }
   return (

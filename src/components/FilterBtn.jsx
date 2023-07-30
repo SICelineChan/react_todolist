@@ -20,10 +20,12 @@ export default function FilterBtn() {
           aria-pressed="true"
           color="primary"
         >
-          show all
+          show
         </Button>
         <Button variant="contained" color="secondary">
-          show completed
+          <span className="visually-hidden">Show </span>
+          <span>all </span>
+          <span className="visually-hidden"> tasks</span>
         </Button>
       </Stack>
     </ThemeProvider>
