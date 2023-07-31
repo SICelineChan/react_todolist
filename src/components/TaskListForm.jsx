@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import { Button } from "@mui/material";
-import TextField from "@mui/material/TextField";
+import { Button, Box, Stack, TextField, FormGroup } from "@mui/material";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useState } from "react";
 
 export default function TaskListForm(props) {
@@ -17,26 +17,33 @@ export default function TaskListForm(props) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2 className="label-wrapper">
-        <label htmlFor="new-todo-input" className="label__lg">
-          Anything else needs to be done?
-        </label>
-      </h2>
-
-      <TextField
-        type="text"
-        id="new-todo-input"
-        name="text"
-        autoComplete="off"
-        value={name}
-        onChange={handleChange}
-        label="Task"
-        variant="outlined"
-      />
-      <Button type="submit" className="btn btn__primary btn__lg">
-        Add
-      </Button>
-    </form>
+    <Box
+      component="form"
+      sx={{ p: 3, m: 2, display: "flex", border: "1px dashed grey" }}
+    >
+      <Stack sx={{ width: "100%" }}>
+        <FormGroup onSubmit={handleSubmit}>
+          <TextField
+            type="text"
+            helperText="Please enter your task"
+            id="new-todo-input"
+            name="text"
+            autoComplete="off"
+            value={name}
+            onChange={handleChange}
+            label="Task"
+            variant="outlined"
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            color="secondary"
+            endIcon={<AddCircleIcon />}
+          >
+            Add
+          </Button>
+        </FormGroup>
+      </Stack>
+    </Box>
   );
 }

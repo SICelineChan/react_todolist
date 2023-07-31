@@ -2,7 +2,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import Navbar from "./components/Navbar";
-import Container from "@mui/material/Container";
 import ToDoInput from "./components/ToDoInput";
 import { useState } from "react";
 import ToDoItem from "./components/ToDoItem";
@@ -11,11 +10,23 @@ import "./someStyles.css";
 import FilterBtn from "./components/FilterBtn";
 import TaskListForm from "./components/TaskListForm";
 import { nanoid } from "nanoid";
-
 import Grid from "@mui/material/Unstable_Grid2";
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+
+const FILTER_MAP = {
+  ALL: () => true,
+  Active: (task) => !task.completed,
+  Completed: (task) => task.completed,
+};
+
+const FILTER_NAMES = Object.keys(FILTER_MAP);
 
 function App(props) {
   const [items, setItems] = useState([]);
+  const [tasks, setTasks] = useState(props.tasks);
+  const [filter, setFilter] = useState("ALL");
 
   function addItem(textInput) {
     setItems((prevItems) => {
@@ -31,18 +42,28 @@ function App(props) {
     });
   }
 
-  const [tasks, setTasks] = useState(props.tasks);
-  const taskList = tasks.map((task) => (
-    <ToDo
-      id={task.id}
-      name={task.name}
-      completed={task.completed}
-      key={task.id}
-      toggleTaskCompleted={toggleTaskCompleted}
-      deleteTask={deleteTask}
-      editTask={editTask}
+  const filterList = FILTER_NAMES.map((name) => (
+    <FilterBtn
+      key={name}
+      name={name}
+      isPressed={name === filter}
+      setFilter={setFilter}
     />
   ));
+
+  const taskList = tasks
+    .filter(FILTER_MAP[filter])
+    .map((task) => (
+      <ToDo
+        id={task.id}
+        name={task.name}
+        completed={task.completed}
+        key={task.id}
+        toggleTaskCompleted={toggleTaskCompleted}
+        deleteTask={deleteTask}
+        editTask={editTask}
+      />
+    ));
 
   function toggleTaskCompleted(id) {
     const updatedTasks = tasks.map((task) => {
@@ -80,45 +101,57 @@ function App(props) {
   return (
     <>
       <Container maxWidth="lg">
-        <div className="title">
-          <Navbar text="My todo list" />
-          <h1>To Do List</h1>
+        <Navbar text="My todo lists" />
+        <h1 style={{ textAlign: "center" }}>A simple TO-Do List</h1>
+        <Box
+          sx={{
+            display: "flex",
+            "& > :not(style)": {
+              m: 1,
+              width: 400,
+              height: 256,
+            },
+          }}
+        >
           <ToDoInput onPass={addItem} />
-        </div>
-        <div>
-          <ul>
-            {items.map((itemToDo, index) => (
-              <ToDoItem
-                key={index}
-                id={index}
-                text={itemToDo}
-                onChecked={removeItem}
-              />
-            ))}
-          </ul>
-        </div>
+          <Paper elevation={12}>
+            <h3 style={{ textAlign: "center" }}>
+              Added todos will appear here!
+            </h3>
+            <ul>
+              {items.map((itemToDo, index) => (
+                <ToDoItem
+                  key={index}
+                  id={index}
+                  text={itemToDo}
+                  onChecked={removeItem}
+                />
+              ))}
+            </ul>
+          </Paper>
+        </Box>
       </Container>
 
       <Container maxWidth="lg">
         <h1 style={{ textAlign: "center" }}>A More Complicated ToDo List!</h1>
-        <Grid container spacing={2} columns={16}>
-          <Grid md={8}>
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Grid xs={6}>
             <TaskListForm addingTask={addingTask} />
           </Grid>
-          <Grid xs={8} mdOffset={1}>
-            <FilterBtn />
-          </Grid>
+          Filter your tasks:
+          {filterList}
         </Grid>
 
         <h2 id="list-heading">{headingText}</h2>
         <div>
-          <ul
-            role="list"
-            className="todo-list stack-large stack-exception"
-            aria-labelledby="list-heading"
-          >
+          <ol role="list" aria-labelledby="list-heading">
             {taskList}
-          </ul>
+          </ol>
         </div>
       </Container>
     </>
