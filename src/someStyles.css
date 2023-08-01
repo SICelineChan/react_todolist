@@ -10,8 +10,10 @@ body {
   clip: rect(1px, 1px, 1px, 1px);
   white-space: nowrap;
 }
-ul {
+ul,
+ol {
   font-family: "Schoolbell", cursive;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   margin: 2px;
+  padding: 5px;
 }
