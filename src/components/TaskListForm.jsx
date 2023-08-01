@@ -17,11 +17,8 @@ export default function TaskListForm(props) {
   }
 
   return (
-    <Box
-      component="form"
-      sx={{ p: 3, m: 2, display: "flex", border: "1px dashed grey" }}
-    >
-      <Stack sx={{ width: "100%" }}>
+    <Box component="form" sx={{ p: 3, m: 2, border: "1px dashed grey" }}>
+      <Stack direction="row" justifyContent="center" alignItems="center">
         <FormGroup onSubmit={handleSubmit}>
           <TextField
             type="text"

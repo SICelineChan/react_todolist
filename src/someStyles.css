@@ -1,3 +1,6 @@
+body {
+  font-family: "Inter", sans-serif;
+}
 .visually-hidden {
   position: absolute !important;
   height: 1px;
@@ -6,4 +9,9 @@
   clip: rect(1px 1px 1px 1px);
   clip: rect(1px, 1px, 1px, 1px);
   white-space: nowrap;
+}
+ul {
+  font-family: "Schoolbell", cursive;
+  font-size: 1.2rem;
+  margin: 2px;
 }

@@ -10,10 +10,7 @@ import "./someStyles.css";
 import FilterBtn from "./components/FilterBtn";
 import TaskListForm from "./components/TaskListForm";
 import { nanoid } from "nanoid";
-import Grid from "@mui/material/Unstable_Grid2";
-import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
+import { Box, Container, Grid, Paper } from "@mui/material";
 
 const FILTER_MAP = {
   ALL: () => true,
@@ -102,34 +99,32 @@ function App(props) {
     <>
       <Container maxWidth="lg">
         <Navbar text="My todo lists" />
-        <h1 style={{ textAlign: "center" }}>A simple TO-Do List</h1>
-        <Box
-          sx={{
-            display: "flex",
-            "& > :not(style)": {
-              m: 1,
-              width: 400,
-              height: 256,
-            },
-          }}
-        >
-          <ToDoInput onPass={addItem} />
-          <Paper elevation={12}>
-            <h3 style={{ textAlign: "center" }}>
-              Added todos will appear here!
-            </h3>
+        <Paper elevation={10}>
+          <h1 style={{ padding: "10px" }}>A simple TO-Do List</h1>
+          <Box
+            sx={{
+              display: "flex",
+              "& > :not(style)": {
+                m: 1,
+                width: 400,
+                height: 256,
+              },
+            }}
+          >
+            <ToDoInput onPass={addItem} />
+
             <ul>
               {items.map((itemToDo, index) => (
                 <ToDoItem
                   key={index}
                   id={index}
                   text={itemToDo}
-                  onChecked={removeItem}
+                  onDelete={removeItem}
                 />
               ))}
             </ul>
-          </Paper>
-        </Box>
+          </Box>
+        </Paper>
       </Container>
 
       <Container maxWidth="lg">
