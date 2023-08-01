@@ -1,17 +1,8 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 import Button from "@mui/material/Button";
-// import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 import { useState } from "react";
-// import { teal, pink } from "@mui/material/colors";
-
-// const theme = createTheme({
-//   palette: {
-//     primary: teal[800],
-//     secondary: pink[300],
-//   },
-// });
 
 export default function ToDo(props) {
   const [isEditing, setIsEditing] = useState(false);
@@ -81,36 +72,5 @@ export default function ToDo(props) {
     </div>
   );
 
-  return (
-    // <ThemeProvider theme={theme}>
-    <li className="todo">{isEditing ? editingTemplate : viewTemplate}</li>
-    // <li className="todo stack-small">
-    //   <div>
-    //     <input
-    //       id={props.id}
-    //       type="checkbox"
-    //       defaultChecked={props.completed}
-    //       onChange={() => props.toggleTaskCompleted(props.id)}
-    //     />
-    //     <label className="todo-label" htmlFor={props.id}>
-    //       {props.name}
-    //     </label>
-    //   </div>
-    //   <div>
-    //     <Stack direction="row" spacing={2}>
-    //       <Button variant="contained" color="success">
-    //         Edit <span className="visually-hidden">{props.name}</span>
-    //       </Button>
-    //       <Button
-    //         variant="outlined"
-    //         color="secondary"
-    //         onClick={() => props.deleteTask(props.id)}
-    //       >
-    //         Delete <span className="visually-hidden">{props.name}</span>
-    //       </Button>
-    //     </Stack>
-    //   </div>
-    // </li>
-    // </ThemeProvider>
-  );
+  return <li>{isEditing ? editingTemplate : viewTemplate}</li>;
 }

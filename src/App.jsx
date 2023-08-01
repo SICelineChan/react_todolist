@@ -10,7 +10,8 @@ import "./someStyles.css";
 import FilterBtn from "./components/FilterBtn";
 import TaskListForm from "./components/TaskListForm";
 import { nanoid } from "nanoid";
-import { Box, Container, Grid, Paper } from "@mui/material";
+import { Box, Container, Paper } from "@mui/material";
+import Grid from "@mui/material/Unstable_Grid2";
 
 const FILTER_MAP = {
   ALL: () => true,
@@ -62,6 +63,11 @@ function App(props) {
       />
     ));
 
+  function addingTask(name) {
+    const newTask = { id: `todo-${nanoid()}`, name, completed: false };
+    setTasks([...tasks, newTask]);
+  }
+
   function toggleTaskCompleted(id) {
     const updatedTasks = tasks.map((task) => {
       if (id === task.id) {
@@ -70,10 +76,6 @@ function App(props) {
       return task;
     });
     setTasks(updatedTasks);
-  }
-  function addingTask(name) {
-    const newTask = { id: `todo-${nanoid()}`, name, completed: false };
-    setTasks([...tasks, newTask]);
   }
 
   function editTask(id, newName) {
@@ -87,7 +89,6 @@ function App(props) {
   }
 
   function deleteTask(id) {
-    console.log(id);
     const remainingTasks = tasks.filter((task) => id !== task.id);
     setTasks(remainingTasks);
   }
@@ -100,7 +101,6 @@ function App(props) {
       <Container maxWidth="lg">
         <Navbar text="My todo lists" />
         <Paper elevation={10}>
-          <h1 style={{ padding: "10px" }}>A simple TO-Do List</h1>
           <Box
             sx={{
               display: "flex",
@@ -112,7 +112,6 @@ function App(props) {
             }}
           >
             <ToDoInput onPass={addItem} />
-
             <ul>
               {items.map((itemToDo, index) => (
                 <ToDoItem
